@@ -12,7 +12,7 @@ class Tarefa {
 	}
 }
 
-var arrayTarefas = new Array();
+var arrayTarefas = [];
 
 
 // =================================================
@@ -23,7 +23,9 @@ function exibeTarefas() {
 	fetch('http://localhost:8080/todo_jsp/tarefas', {
 		method: 'GET'
 	})
-		.then(response => response.json())
+		.then(response => {
+			return response.json()
+		})
 		.then(data => {
 			arrayTarefas = data;
 			mostraNaTela();
@@ -49,7 +51,7 @@ function mostraNaTela() {
 	let id = 0;
 	for (let t of arrayTarefas) {
 		id = t.id;
-		txt = t.texto;
+		txt = t.txt;
 		selecionado = t.marcado;
 		registroAtual = `<div class="registro">`;
 		if (!selecionado) {
@@ -117,7 +119,7 @@ function adicionarTarefa() {
 		})
 	})
 		.then(() => {
-			exibeTarefas();
+			//exibeTarefas();
 		})
 		.catch(
 			e => {
