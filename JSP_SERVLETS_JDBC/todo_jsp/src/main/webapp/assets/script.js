@@ -119,7 +119,7 @@ function adicionarTarefa() {
 		})
 	})
 		.then(() => {
-			//exibeTarefas();
+			exibeTarefas();
 		})
 		.catch(
 			e => {
