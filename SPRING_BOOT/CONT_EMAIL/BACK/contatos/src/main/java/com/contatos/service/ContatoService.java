@@ -38,6 +38,7 @@ public class ContatoService {
 		contatoRepository.updateAllMarcado(marcado);
 	}
 	
+    @Transactional
 	public void removerMarcados() {
 		contatoRepository.deleteByMarcadoTrue();
 	}
