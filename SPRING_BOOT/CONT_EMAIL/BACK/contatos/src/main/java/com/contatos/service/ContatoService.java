@@ -3,6 +3,7 @@ package com.contatos.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.contatos.dto.ContatoDto;
 import com.contatos.model.Contato;
 import com.contatos.repository.ContatoRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ContatoService {
@@ -23,17 +26,19 @@ public class ContatoService {
 	public List<ContatoDto> getAll() {
 		List<Contato> contatos = contatoRepository.findAll();
 		List<ContatoDto> dtos = new ArrayList<ContatoDto>();
-		for (Contato c : contatos) {
-			dtos.add(new ContatoDto(c));
+		for (Contato cto : contatos) {
+			dtos.add(new ContatoDto(cto));
 		}
 		return dtos;
 	}
 	
 	// Marca (ou desmarca) tudo
+	@Transactional
 	public void marcarTudo(boolean marcado) {
 		contatoRepository.updateAllMarcado(marcado);
 	}
 	
+	@Transactional
 	public void removerMarcados() {
 		contatoRepository.deleteByMarcadoTrue();
 	}
